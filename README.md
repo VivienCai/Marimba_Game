@@ -114,7 +114,7 @@ The course emphasizes:
 - Confidence through process and iteration
 - Embracing debugging and “productive confusion” as part of learning
 
-The accompanying slides to this course can be [viewed here](https://slides.com/joanneho/dm2008-s1-2526/fullscreen).
+The accompanying slides to this course can be [viewed here](https://slides.com/kapilan-naidu/dm2008-s2-2526/fullscreen).
 
 ---
 
