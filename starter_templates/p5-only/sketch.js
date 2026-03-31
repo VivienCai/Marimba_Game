@@ -1,3 +1,6 @@
+let creatures = [];
+let plants = [];
+
 function setup() {
   // If you want a canvas that fills the window
   // createCanvas(windowWidth, windowHeight);
