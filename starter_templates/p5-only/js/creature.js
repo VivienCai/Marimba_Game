@@ -21,16 +21,13 @@ class Creature {
         this.hopHeight = random(10, 25);
     }
 
-    startHop() {
+    startHop(targetX, targetY) {
         this.startX = this.x;
         this.startY = this.y;
 
-        this.targetX = this.x + random(-50, 50);
-        this.targetY = this.y + random(-50, 50);
-
         // Keep target within bounds
-        this.targetX = constrain(this.targetX, 0, screenWidth);
-        this.targetY = constrain(this.targetY, 80, screenHeight);
+        this.targetX = constrain(targetX, 0, screenWidth);
+        this.targetY = constrain(targetY, 80, screenHeight);
 
         this.isHopping = true;
         this.hopProgress = 0;
@@ -42,7 +39,37 @@ class Creature {
             this.waitTimer--;
 
             if (this.waitTimer <= 0) {
-                this.startHop();
+                if (currentTool === "sword") {
+                    let d = dist(this.x, this.y, mouseX, mouseY);
+
+                    if (d < 500) {
+                        let dx = this.x - mouseX;
+                        let dy = this.y - mouseY;
+
+                        let length = sqrt(dx * dx + dy * dy);
+
+                        if (length > 0) {
+                            dx = dx / length;
+                            dy = dy / length;
+                        }
+
+                        let hopDistance = map(d, 0, 500, 250, 20);
+
+                        this.startHop(
+                            this.x + dx * hopDistance,
+                            this.y + dy * hopDistance
+                        );
+                    }
+                    else {
+                        // Otherwise hop in a random direction
+                        this.startHop(this.x + random(-50, 50), this.y + random(-50, 50));
+                    }
+
+                }
+                else {
+                    // Otherwise hop in a random direction
+                    this.startHop(this.x + random(-50, 50), this.y + random(-50, 50));
+                }
             }
         } else {
             this.hopProgress++;
@@ -74,7 +101,7 @@ class Creature {
 
         fill(100, 150, 255);
         noStroke();
-        ellipse(this.x, this.y - bounce, this.size, this.size * 0.8);
+        ellipse(this.x, this.y - bounce, this.size, this.size * 0.85);
 
     }
 

@@ -14,6 +14,15 @@ let plants = [];
 let spawnCreatureButton;
 let spawnPlantButton;
 
+
+let currentTool = "none";
+
+// Loading assets (images, sounds, etc.) 
+function preload() {
+  swordIcon = loadImage('assets/sword.png');
+}
+
+
 function setup() {
   createCanvas(screenWidth, screenHeight);
 
@@ -57,6 +66,8 @@ function setup() {
     label: "W"
   };
 
+  console.log("Setup complete");
+
 }
 
 function draw() {
@@ -65,18 +76,33 @@ function draw() {
   drawPlants();
   drawCreatures();
   drawUI();
+
+  if (currentTool === "sword") {
+    drawSwordCursor();
+  } else if (currentTool === "food") {
+    drawFoodCursor();
+  } else if (currentTool === "water") {
+    drawWaterCursor();
+  } else if (currentTool === "none") {
+    cursor();
+  }
 }
 
 function mousePressed() {
   if (isInsideButton(mouseX, mouseY, spawnCreatureButton)) {
+    currentTool = "none";
     creatures.push(new Creature(random(screenWidth), random(screenHeight)));
   } else if (isInsideButton(mouseX, mouseY, spawnPlantButton)) {
+    currentTool = "none";
     plants.push(new Plant(random(screenWidth), random(screenHeight)));
   } else if (isInsideButton(mouseX, mouseY, swordButton)) {
+    currentTool = "sword";
     console.log("Sword button clicked");
   } else if (isInsideButton(mouseX, mouseY, foodButton)) {
+    currentTool = "food";
     console.log("Food button clicked");
   } else if (isInsideButton(mouseX, mouseY, waterButton)) {
+    currentTool = "water";
     console.log("Water button clicked");
   }
 }

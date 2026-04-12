@@ -22,3 +22,16 @@ function isInsideButton(mx, my, button) {
         my < button.y + button.height
     );
 }
+
+function drawSwordCursor() {
+    noCursor();
+    imageMode(CENTER);
+    image(swordIcon, mouseX, mouseY, 50, 50);
+
+}
+
+function drawFoodCursor() {
+}
+
+function drawWaterCursor() {
+}
