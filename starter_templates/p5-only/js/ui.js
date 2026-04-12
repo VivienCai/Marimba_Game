@@ -1,6 +1,9 @@
 function drawUI() {
     drawButton(spawnCreatureButton);
     drawButton(spawnPlantButton);
+    drawButton(swordButton);
+    drawButton(foodButton);
+    drawButton(waterButton);
 }
 
 function drawButton(button) {

@@ -69,12 +69,13 @@ class Creature {
             bounce = sin(t * PI) * this.hopHeight;
         }
 
+        fill(0, 40);
+        ellipse(this.x, this.y + this.size * 0.35, this.size * 0.8, this.size * 0.3);
+
         fill(100, 150, 255);
         noStroke();
         ellipse(this.x, this.y - bounce, this.size, this.size * 0.8);
 
-        fill(0, 40);
-        ellipse(this.x, this.y + this.size * 0.35, this.size * 0.6, this.size * 0.2);
     }
 
     update() {
