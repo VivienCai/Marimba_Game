@@ -1,19 +1,19 @@
 screenWidth = 1300;
 screenHeight = 1000;
 
-buttonWidth = 100;
-buttonHeight = 100;
+buttonWidth = 70;
+buttonHeight = 70;
 
 topSpacingBetweenButtons = 50;
 sideSpacingBetweenButtons = 50;
 
+sideMargin = 30;
+
 let creatures = [];
 let plants = [];
 
-
 let spawnCreatureButton;
 let spawnPlantButton;
-
 
 let currentTool = "none";
 
@@ -43,15 +43,16 @@ function setup() {
   };
 
   swordButton = {
-    x: 10,
+    x: sideMargin,
     y: screenHeight / 2 - buttonHeight / 2 - sideSpacingBetweenButtons - buttonHeight,
     width: buttonWidth,
     height: buttonHeight,
+    image: swordIcon,
     label: "S"
   };
 
   foodButton = {
-    x: 10,
+    x: sideMargin,
     y: screenHeight / 2 - buttonHeight / 2,
     width: buttonWidth,
     height: buttonHeight,
@@ -59,7 +60,7 @@ function setup() {
   };
 
   waterButton = {
-    x: 10,
+    x: sideMargin,
     y: screenHeight / 2 + buttonHeight / 2 + sideSpacingBetweenButtons,
     width: buttonWidth,
     height: buttonHeight,
@@ -96,8 +97,13 @@ function mousePressed() {
     currentTool = "none";
     plants.push(new Plant(random(screenWidth), random(screenHeight)));
   } else if (isInsideButton(mouseX, mouseY, swordButton)) {
-    currentTool = "sword";
-    console.log("Sword button clicked");
+    if (currentTool === "sword") {
+      currentTool = "none";
+      console.log("Sword button deselected");
+    } else {
+      currentTool = "sword";
+      console.log("Sword button clicked");
+    }
   } else if (isInsideButton(mouseX, mouseY, foodButton)) {
     currentTool = "food";
     console.log("Food button clicked");

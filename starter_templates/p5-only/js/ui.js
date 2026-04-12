@@ -8,10 +8,16 @@ function drawUI() {
 
 function drawButton(button) {
     fill(200);
-    rect(button.x, button.y, button.width, button.height);
-    fill(0);
-    textAlign(CENTER, CENTER);
-    text(button.label, button.x + button.width / 2, button.y + button.height / 2);
+    // rect(button.x, button.y, button.width, button.height);
+
+    if (button.image) {
+        imageMode(CENTER);
+        image(button.image, button.x + button.width / 2, button.y + button.height / 2, button.width, button.height);
+    } else {
+        fill(0);
+        textAlign(CENTER, CENTER);
+        text(button.label, button.x + button.width / 2, button.y + button.height / 2);
+    }
 }
 
 function isInsideButton(mx, my, button) {
@@ -26,7 +32,7 @@ function isInsideButton(mx, my, button) {
 function drawSwordCursor() {
     noCursor();
     imageMode(CENTER);
-    image(swordIcon, mouseX, mouseY, 50, 50);
+    image(swordIcon, mouseX, mouseY, swordButton.width, swordButton.height);
 
 }
 
