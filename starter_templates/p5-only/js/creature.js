@@ -8,8 +8,8 @@ class Creature {
         this.targetX = x;
         this.targetY = y;
 
-        this.size = 40;
-
+        this.size = 50;
+        this.type = int(random(3)); // 0, 1, or 2 for different creature types
         this.isHopping = false;
 
         // One hop takes 20 frames
@@ -96,12 +96,14 @@ class Creature {
             bounce = sin(t * PI) * this.hopHeight;
         }
 
+        // Shadow
         fill(0, 40);
-        ellipse(this.x, this.y + this.size * 0.35, this.size * 0.8, this.size * 0.3);
-
-        fill(100, 150, 255);
+        ellipse(this.x, this.y + this.size * 0.45, this.size * 0.8, this.size * 0.3);
         noStroke();
-        ellipse(this.x, this.y - bounce, this.size, this.size * 0.85);
+
+        // Creature
+        // ellipse(this.x, this.y - bounce, this.size, this.size * 0.85);
+        image(creatureBabyImages[this.type], this.x, this.y - bounce, this.size, this.size);
 
     }
 

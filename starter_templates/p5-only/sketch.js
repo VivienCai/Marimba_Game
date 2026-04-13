@@ -17,9 +17,19 @@ let spawnPlantButton;
 
 let currentTool = "none";
 
+let creatureBabyImages = [];
+let creatureAdultImages = [];
+
 // Loading assets (images, sounds, etc.) 
 function preload() {
   swordIcon = loadImage('assets/sword.png');
+
+  creatureBabyImages[0] = loadImage('assets/creature_1_baby.png');
+  creatureAdultImages[0] = loadImage('assets/creature_1_adult.png');
+  creatureBabyImages[1] = loadImage('assets/creature_2_baby.png');
+  creatureAdultImages[1] = loadImage('assets/creature_2_adult.png');
+  creatureBabyImages[2] = loadImage('assets/creature_3_baby.png');
+  creatureAdultImages[2] = loadImage('assets/creature_3_adult.png');
 }
 
 
@@ -90,6 +100,7 @@ function draw() {
 }
 
 function mousePressed() {
+  // Button Interaction 
   if (isInsideButton(mouseX, mouseY, spawnCreatureButton)) {
     currentTool = "none";
     creatures.push(new Creature(random(screenWidth), random(screenHeight)));
@@ -111,4 +122,12 @@ function mousePressed() {
     currentTool = "water";
     console.log("Water button clicked");
   }
+  // Creature Interaction
+  for (let creature of creatures) {
+    if (isInsideButton(mouseX, mouseY, creature)) {
+      console.log("Creature clicked");
+    }
+  }
+
+
 }
