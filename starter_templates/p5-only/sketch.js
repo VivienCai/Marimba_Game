@@ -124,12 +124,16 @@ function mousePressed() {
     currentTool = "water";
     console.log("Water button clicked");
   }
+
   // Creature Interaction
-  for (let creature of creatures) {
-    if (isInsideButton(mouseX, mouseY, creature)) {
-      console.log("Creature clicked");
+  if (currentTool === "food") {
+    for (let creature of creatures) {
+      if (creature.isClicked(mouseX, mouseY)) {
+        console.log("Creature clicked");
+        creature.feed();
+        break;
+      }
     }
   }
-
 
 }
