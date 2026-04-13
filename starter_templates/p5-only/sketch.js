@@ -23,7 +23,7 @@ let creatureAdultImages = [];
 // Loading assets (images, sounds, etc.) 
 function preload() {
   swordIcon = loadImage('assets/sword.png');
-
+  foodIcon = loadImage('assets/food.png');
   creatureBabyImages[0] = loadImage('assets/creature_1_baby.png');
   creatureAdultImages[0] = loadImage('assets/creature_1_adult.png');
   creatureBabyImages[1] = loadImage('assets/creature_2_baby.png');
@@ -66,6 +66,7 @@ function setup() {
     y: screenHeight / 2 - buttonHeight / 2,
     width: buttonWidth,
     height: buttonHeight,
+    image: foodIcon,
     label: "F"
   };
 
@@ -118,6 +119,7 @@ function mousePressed() {
   } else if (isInsideButton(mouseX, mouseY, foodButton)) {
     currentTool = "food";
     console.log("Food button clicked");
+
   } else if (isInsideButton(mouseX, mouseY, waterButton)) {
     currentTool = "water";
     console.log("Water button clicked");

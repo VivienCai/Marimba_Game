@@ -39,7 +39,7 @@ class Creature {
             this.waitTimer--;
 
             if (this.waitTimer <= 0) {
-                if (currentTool === "sword") {
+                if (currentTool === "sword" || currentTool === "food") {
                     let d = dist(this.x, this.y, mouseX, mouseY);
 
                     if (d < 500) {
@@ -55,10 +55,17 @@ class Creature {
 
                         let hopDistance = map(d, 0, 500, 250, 20);
 
-                        this.startHop(
-                            this.x + dx * hopDistance,
-                            this.y + dy * hopDistance
-                        );
+                        if (currentTool === "sword") {
+                            this.startHop(
+                                this.x + dx * hopDistance,
+                                this.y + dy * hopDistance
+                            );
+                        } else if (currentTool === "food") {
+                            this.startHop(
+                                this.x - dx * 50,
+                                this.y - dy * 50
+                            );
+                        }
                     }
                     else {
                         // Otherwise hop in a random direction

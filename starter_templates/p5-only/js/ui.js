@@ -37,6 +37,9 @@ function drawSwordCursor() {
 }
 
 function drawFoodCursor() {
+    noCursor();
+    imageMode(CENTER);
+    image(foodIcon, mouseX, mouseY, foodButton.width, foodButton.height);
 }
 
 function drawWaterCursor() {
