@@ -143,6 +143,9 @@ class Creature {
 
         if (this.size >= 70) {
             this.stage = "adult";
+            if (this.type === 2) {
+                this.size = 110;
+            }
         }
     }
 }

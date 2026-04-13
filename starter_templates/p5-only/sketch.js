@@ -131,6 +131,7 @@ function mousePressed() {
       if (creature.isClicked(mouseX, mouseY)) {
         console.log("Creature clicked");
         creature.feed();
+        currentTool = "none";
         break;
       }
     }
