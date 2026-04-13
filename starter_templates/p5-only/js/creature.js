@@ -8,7 +8,7 @@ class Creature {
         this.targetX = x;
         this.targetY = y;
 
-        this.size = 50;
+        this.size = 2.5;
         this.type = int(random(3)); // 0, 1, or 2 for different creature types
         this.isHopping = false;
 
@@ -105,12 +105,11 @@ class Creature {
 
         // Shadow
         fill(0, 40);
-        ellipse(this.x, this.y + this.size * 0.45, this.size * 0.8, this.size * 0.3);
+        ellipse(this.x, this.y + creatureBabyImages[this.type].height * this.size * 0.5, creatureBabyImages[this.type].width * this.size * 0.8, creatureBabyImages[this.type].height * this.size * 0.3);
         noStroke();
 
         // Creature
-        // ellipse(this.x, this.y - bounce, this.size, this.size * 0.85);
-        image(creatureBabyImages[this.type], this.x, this.y - bounce, this.size, this.size);
+        image(creatureBabyImages[this.type], this.x, this.y - bounce, creatureBabyImages[this.type].width * this.size, creatureBabyImages[this.type].height * this.size);
 
     }
 
