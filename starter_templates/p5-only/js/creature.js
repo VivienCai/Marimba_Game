@@ -135,7 +135,7 @@ class Creature {
         }
 
         let d = dist(mx, my, this.x, this.y - bounce);
-        return d < 50;
+        return d < this.size;
     }
 
     feed() {

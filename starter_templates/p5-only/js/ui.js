@@ -43,4 +43,7 @@ function drawFoodCursor() {
 }
 
 function drawWaterCursor() {
+    noCursor();
+    imageMode(CENTER);
+    image(waterIcon, mouseX, mouseY, waterButton.width, waterButton.height);
 }

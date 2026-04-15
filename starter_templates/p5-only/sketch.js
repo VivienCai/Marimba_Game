@@ -19,17 +19,28 @@ let currentTool = "none";
 
 let creatureBabyImages = [];
 let creatureAdultImages = [];
+let plantBabyImages = [];
+let plantAdultImages = [];
 
 // Loading assets (images, sounds, etc.) 
 function preload() {
   swordIcon = loadImage('assets/sword.png');
   foodIcon = loadImage('assets/food.png');
+  waterIcon = loadImage('assets/water.png');
+
   creatureBabyImages[0] = loadImage('assets/creature_1_baby.png');
   creatureAdultImages[0] = loadImage('assets/creature_1_adult.png');
   creatureBabyImages[1] = loadImage('assets/creature_2_baby.png');
   creatureAdultImages[1] = loadImage('assets/creature_2_adult.png');
   creatureBabyImages[2] = loadImage('assets/creature_3_baby.png');
   creatureAdultImages[2] = loadImage('assets/creature_3_adult.png');
+
+  plantBabyImages[0] = loadImage('assets/tree_1_seed.png');
+  plantAdultImages[0] = loadImage('assets/tree_1_grown.png');
+  plantBabyImages[1] = loadImage('assets/tree_2_seed.png');
+  plantAdultImages[1] = loadImage('assets/tree_2_grown.png');
+  plantBabyImages[2] = loadImage('assets/tree_3_seed.png');
+  plantAdultImages[2] = loadImage('assets/tree_3_grown.png');
 }
 
 
@@ -75,6 +86,7 @@ function setup() {
     y: screenHeight / 2 + buttonHeight / 2 + sideSpacingBetweenButtons,
     width: buttonWidth,
     height: buttonHeight,
+    image: waterIcon,
     label: "W"
   };
 
@@ -117,12 +129,22 @@ function mousePressed() {
       console.log("Sword button clicked");
     }
   } else if (isInsideButton(mouseX, mouseY, foodButton)) {
-    currentTool = "food";
-    console.log("Food button clicked");
+    if (currentTool === "food") {
+      currentTool = "none";
+      console.log("Food button deselected");
+    } else {
+      currentTool = "food";
+      console.log("Food button clicked");
+    }
 
   } else if (isInsideButton(mouseX, mouseY, waterButton)) {
-    currentTool = "water";
-    console.log("Water button clicked");
+    if (currentTool === "water") {
+      currentTool = "none";
+      console.log("Water button deselected");
+    } else {
+      currentTool = "water";
+      console.log("Water button clicked");
+    }
   }
 
   // Creature Interaction
@@ -131,6 +153,17 @@ function mousePressed() {
       if (creature.isClicked(mouseX, mouseY)) {
         console.log("Creature clicked");
         creature.feed();
+        currentTool = "none";
+        break;
+      }
+    }
+  }
+  // Plant Interaction
+  if (currentTool === "water") {
+    for (let plant of plants) {
+      if (plant.isClicked(mouseX, mouseY)) {
+        console.log("Plant clicked");
+        plant.water();
         currentTool = "none";
         break;
       }
