@@ -8,7 +8,6 @@ function drawUI() {
 
 function drawButton(button) {
     fill(200);
-    // rect(button.x, button.y, button.width, button.height);
 
     if (button.image) {
         imageMode(CENTER);
@@ -31,8 +30,13 @@ function isInsideButton(mx, my, button) {
 
 function drawSwordCursor() {
     noCursor();
+
+    push();
+    translate(mouseX, mouseY);
+    rotate(PI / 4);
     imageMode(CENTER);
-    image(swordIcon, mouseX, mouseY, swordButton.width, swordButton.height);
+    image(swordIcon, 0, 0, swordButton.width, swordButton.height);
+    pop();
 
 }
 

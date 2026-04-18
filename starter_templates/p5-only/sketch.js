@@ -24,9 +24,9 @@ let plantAdultImages = [];
 
 // Loading assets (images, sounds, etc.) 
 function preload() {
-  swordIcon = loadImage('assets/sword.png');
-  foodIcon = loadImage('assets/food.png');
-  waterIcon = loadImage('assets/water.png');
+  swordIcon = loadImage('assets/ui/UI_sword.png');
+  foodIcon = loadImage('assets/ui/food.png');
+  waterIcon = loadImage('assets/ui/water.png');
 
   creatureBabyImages[0] = loadImage('assets/creature_1_baby.png');
   creatureAdultImages[0] = loadImage('assets/creature_1_adult.png');
@@ -46,6 +46,7 @@ function preload() {
 
 function setup() {
   createCanvas(screenWidth, screenHeight);
+  noSmooth();
 
   spawnCreatureButton = {
     x: (screenWidth / 2) - (buttonWidth + topSpacingBetweenButtons / 2),
@@ -67,7 +68,7 @@ function setup() {
     x: sideMargin,
     y: screenHeight / 2 - buttonHeight / 2 - sideSpacingBetweenButtons - buttonHeight,
     width: buttonWidth,
-    height: buttonHeight,
+    height: 100,
     image: swordIcon,
     label: "S"
   };
@@ -100,6 +101,8 @@ function draw() {
   drawPlants();
   drawCreatures();
   drawUI();
+
+  ellipse(screenWidth / 2 + 50, screenHeight / 2 + 200, 1000, 300);
 
   if (currentTool === "sword") {
     drawSwordCursor();
@@ -153,7 +156,7 @@ function mousePressed() {
       if (creature.isClicked(mouseX, mouseY)) {
         console.log("Creature clicked");
         creature.feed();
-        currentTool = "none";
+        // currentTool = "none";
         break;
       }
     }
@@ -164,7 +167,7 @@ function mousePressed() {
       if (plant.isClicked(mouseX, mouseY)) {
         console.log("Plant clicked");
         plant.water();
-        currentTool = "none";
+        // currentTool = "none";
         break;
       }
     }

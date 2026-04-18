@@ -8,7 +8,8 @@ class Creature {
         this.targetX = x;
         this.targetY = y;
 
-        this.size = 50;
+        this.size = 75;
+        this.adultSize = 100;
         this.type = int(random(3)); // 0, 1, or 2 for different creature types
         this.stage = "baby"; // can be "baby" or "adult"
         this.isHopping = false;
@@ -141,10 +142,10 @@ class Creature {
     feed() {
         this.size += 5;
 
-        if (this.size >= 70) {
+        if (this.size >= this.adultSize && this.stage === "baby") {
             this.stage = "adult";
             if (this.type === 2) {
-                this.size = 110;
+                this.size += 50;
             }
         }
     }

@@ -2,7 +2,8 @@ class Plant {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.size = 45;
+        this.size = 90;
+        this.adultSize = 120;
         this.stage = "baby"; // can be "baby" or "adult"
         this.type = int(random(3)); // 0, 1, or 2 for different plant types
     }
@@ -31,9 +32,9 @@ class Plant {
 
     water() {
         this.size += 5;
-        if (this.size >= 65) {
+        if (this.size >= this.adultSize) {
             this.stage = "adult";
-            this.size = 85
+
         }
     }
 
