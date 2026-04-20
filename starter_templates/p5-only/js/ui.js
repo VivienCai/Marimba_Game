@@ -1,4 +1,5 @@
 function drawUI() {
+    updateTopButtonSprites();
     drawButton(spawnCreatureButton);
     drawButton(spawnPlantButton);
     drawButton(swordButton);
@@ -68,4 +69,18 @@ function drawWaterCursor() {
     imageMode(CENTER);
     pop();
     image(waterIcon, mouseX, mouseY, waterButton.width, waterButton.height);
+}
+
+function updateTopButtonSprites() {
+    if (isInsideButton(mouseX, mouseY, spawnCreatureButton) && mouseIsPressed) {
+        spawnCreatureButton.image = spawnCreaturePressedIcon;
+    } else {
+        spawnCreatureButton.image = spawnCreatureIcon;
+    }
+
+    if (isInsideButton(mouseX, mouseY, spawnPlantButton) && mouseIsPressed) {
+        spawnPlantButton.image = spawnPlantPressedIcon;
+    } else {
+        spawnPlantButton.image = spawnPlantIcon;
+    }
 }
