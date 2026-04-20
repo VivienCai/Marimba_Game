@@ -55,9 +55,12 @@ class Creature {
                             dy = dy / length;
                         }
 
-                        let hopDistance = map(d, 0, 500, 250, 20);
 
                         if (currentTool === "sword") {
+                            let hopDistance = map(d, 0, 500, 250, 20);
+                            // if (this.size >= this.adultSize + 20) {
+                            //     hopDistance = 0;
+                            // }
                             this.startHop(
                                 this.x + dx * hopDistance,
                                 this.y + dy * hopDistance
@@ -145,14 +148,19 @@ class Creature {
     }
 
     feed() {
-        this.size += 5;
-
-        if (this.size >= this.adultSize && this.stage === "baby") {
-            this.stage = "adult";
-            if (this.type === 2) {
-                this.size += 50;
+        if (this.size < 140) {
+            this.size += 5;
+            if (this.size >= this.adultSize && this.stage === "baby") {
+                this.stage = "adult";
+                if (this.type === 2) {
+                    this.size += 50;
+                }
             }
         }
+        else if (this.size < 190 && this.type === 2) {
+            this.size += 5;
+        }
+
     }
 }
 
