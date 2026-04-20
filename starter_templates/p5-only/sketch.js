@@ -141,7 +141,8 @@ function draw() {
     drawCreatures();
     drawUI();
 
-
+    push();
+    imageMode(CENTER);
     if (currentTool === "sword") {
       drawSwordCursor();
     } else if (currentTool === "food") {
@@ -151,6 +152,7 @@ function draw() {
     } else if (currentTool === "none") {
       cursor();
     }
+    pop();
     lastFrame = get();
   }
 
