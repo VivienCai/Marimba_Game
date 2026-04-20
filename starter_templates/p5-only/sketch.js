@@ -9,6 +9,13 @@ const TOP_BUTTON_SPACING = 50;
 const SIDE_BUTTON_SPACING = 50;
 const MARGIN = 30;
 
+const ARENA = {
+  x: SCREEN_WIDTH / 2 + 50,
+  y: SCREEN_HEIGHT / 2 + 200,
+  w: 1100,
+  h: 400
+};
+
 // GAME STATE ----------------------------------------------------------------------
 let creatures = [];
 let plants = [];
@@ -122,12 +129,12 @@ function setup() {
 
 function draw() {
   background(240);
+  ellipse(ARENA.x, ARENA.y, ARENA.w, ARENA.h);
 
   drawPlants();
   drawCreatures();
   drawUI();
 
-  ellipse(SCREEN_WIDTH / 2 + 50, SCREEN_HEIGHT / 2 + 200, 1100, 400);
 
   if (currentTool === "sword") {
     drawSwordCursor();
@@ -140,3 +147,51 @@ function draw() {
   }
 }
 
+// HELPERS ----------------------------------------------------------------------
+function isInsideArena(x, y) {
+  let dx = x - ARENA.x;
+  let dy = y - ARENA.y;
+
+  let rx = ARENA.w / 2;
+  let ry = ARENA.h / 2;
+
+  return (dx * dx) / (rx * rx) + (dy * dy) / (ry * ry) <= 1;
+}
+
+function randomPointInArena() {
+  let x, y;
+
+  do {
+    x = random(ARENA.x - ARENA.w / 2, ARENA.x + ARENA.w / 2);
+    y = random(ARENA.y - ARENA.h / 2, ARENA.y + ARENA.h / 2);
+  } while (!isInsideArena(x, y));
+
+  return { x, y };
+}
+
+function constrainToArena(x, y, margin = 0) {
+  let dx = x - ARENA.x;
+  let dy = y - ARENA.y;
+
+  let rx = ARENA.w / 2 - margin;
+  let ry = ARENA.h / 2 - margin;
+
+  if (rx <= 0 || ry <= 0) {
+    return { x: ARENA.x, y: ARENA.y };
+  }
+
+  let value = (dx * dx) / (rx * rx) + (dy * dy) / (ry * ry);
+
+  // already inside
+  if (value <= 1) {
+    return { x, y };
+  }
+
+  // project point back to ellipse edge
+  let scale = 1 / sqrt(value);
+
+  return {
+    x: ARENA.x + dx * scale,
+    y: ARENA.y + dy * scale
+  };
+}

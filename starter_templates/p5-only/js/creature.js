@@ -1,24 +1,24 @@
 class Creature {
     constructor(x, y) {
-        this.x = x;
-        this.y = y;
+        let safePos = constrainToArena(x, y);
 
-        this.startX = x;
-        this.startY = y;
-        this.targetX = x;
-        this.targetY = y;
+        this.x = safePos.x;
+        this.y = safePos.y;
+
+        this.startX = this.x;
+        this.startY = this.y;
+        this.targetX = this.x;
+        this.targetY = this.y;
 
         this.size = 75;
         this.adultSize = 100;
-        this.type = int(random(3)); // 0, 1, or 2 for different creature types
-        this.stage = "baby"; // can be "baby" or "adult"
+        this.type = int(random(3));
+        this.stage = "baby";
         this.isHopping = false;
 
-        // One hop takes 20 frames
         this.hopProgress = 0;
         this.hopDuration = 20;
 
-        // Frames to wait before next hop
         this.waitTimer = int(random(20, 60));
         this.hopHeight = random(10, 25);
     }
@@ -27,9 +27,10 @@ class Creature {
         this.startX = this.x;
         this.startY = this.y;
 
-        // Keep target within bounds
-        this.targetX = constrain(targetX, 0, SCREEN_WIDTH);
-        this.targetY = constrain(targetY, 80, SCREEN_HEIGHT);
+        // Keep hop target inside ellipse instead of screen rectangle
+        let safeTarget = constrainToArena(targetX, targetY, this.size * 0.35);
+        this.targetX = safeTarget.x;
+        this.targetY = safeTarget.y;
 
         this.isHopping = true;
         this.hopProgress = 0;
@@ -37,7 +38,6 @@ class Creature {
 
     move() {
         if (!this.isHopping) {
-            // Countdown until next hop
             this.waitTimer--;
 
             if (this.waitTimer <= 0) {
@@ -68,22 +68,22 @@ class Creature {
                                 this.y - dy * 50
                             );
                         }
+                    } else {
+                        this.startHop(
+                            this.x + random(-50, 50),
+                            this.y + random(-50, 50)
+                        );
                     }
-                    else {
-                        // Otherwise hop in a random direction
-                        this.startHop(this.x + random(-50, 50), this.y + random(-50, 50));
-                    }
-
-                }
-                else {
-                    // Otherwise hop in a random direction
-                    this.startHop(this.x + random(-50, 50), this.y + random(-50, 50));
+                } else {
+                    this.startHop(
+                        this.x + random(-50, 50),
+                        this.y + random(-50, 50)
+                    );
                 }
             }
         } else {
             this.hopProgress++;
 
-            // t is percentage of the hop completed (0 to 1)
             let t = this.hopProgress / this.hopDuration;
             t = constrain(t, 0, 1);
 
@@ -112,17 +112,19 @@ class Creature {
             img = creatureAdultImages[this.type];
         }
 
-        // Shadow
         fill(0, 40);
-        ellipse(this.x, this.y + (img.height / img.width) * this.size * 0.55, this.size * 0.8, this.size * 0.3);
+        ellipse(
+            this.x,
+            this.y + (img.height / img.width) * this.size * 0.55,
+            this.size * 0.8,
+            this.size * 0.3
+        );
         noStroke();
 
-        // Creature
         push();
         imageMode(CENTER);
         image(img, this.x, this.y - bounce, this.size, (img.height / img.width) * this.size);
         pop();
-
     }
 
     update() {
