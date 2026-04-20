@@ -22,7 +22,10 @@ class Plant {
         ellipse(this.x, this.y + (img.height / img.width) * this.size * 0.4, this.size * 0.8, this.size * 0.3);
         noStroke();
 
+        push();
+        imageMode(CENTER);
         image(img, this.x, this.y, this.size, (img.height / img.width) * this.size);
+        pop();
     }
 
     isClicked(mx, my) {

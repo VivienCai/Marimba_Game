@@ -1,8 +1,8 @@
 screenWidth = 1300;
 screenHeight = 1000;
 
-buttonWidth = 70;
-buttonHeight = 70;
+buttonWidth = 90;
+buttonHeight = 90;
 
 topSpacingBetweenButtons = 50;
 sideSpacingBetweenButtons = 50;
@@ -25,8 +25,11 @@ let plantAdultImages = [];
 // Loading assets (images, sounds, etc.) 
 function preload() {
   swordIcon = loadImage('assets/ui/UI_sword.png');
-  foodIcon = loadImage('assets/ui/food.png');
-  waterIcon = loadImage('assets/ui/water.png');
+  swordIconEmpty = loadImage('assets/ui/UI_sword_outline.png');
+  foodIcon = loadImage('assets/ui/UI_food.png');
+  foodIconEmpty = loadImage('assets/ui/UI_food_outline.png');
+  waterIcon = loadImage('assets/ui/UI_water.png');
+  waterIconEmpty = loadImage('assets/ui/UI_water_outline.png');
 
   creatureBabyImages[0] = loadImage('assets/creature_1_baby.png');
   creatureAdultImages[0] = loadImage('assets/creature_1_adult.png');
@@ -45,6 +48,11 @@ function preload() {
 
 
 function setup() {
+  let swordH = swordIcon.height / swordIcon.width * buttonWidth;
+  let foodH = foodIcon.height / foodIcon.width * buttonWidth;
+  let waterH = waterIcon.height / waterIcon.width * buttonWidth;
+
+
   createCanvas(screenWidth, screenHeight);
   noSmooth();
 
@@ -66,29 +74,27 @@ function setup() {
 
   swordButton = {
     x: sideMargin,
-    y: screenHeight / 2 - buttonHeight / 2 - sideSpacingBetweenButtons - buttonHeight,
+    y: screenHeight / 2 - foodH / 2 - sideSpacingBetweenButtons - swordH,
+    rotation: 45,
     width: buttonWidth,
-    height: 100,
+    height: swordH,
     image: swordIcon,
-    label: "S"
   };
 
   foodButton = {
     x: sideMargin,
-    y: screenHeight / 2 - buttonHeight / 2,
+    y: screenHeight / 2 - foodH / 2 - 10,
     width: buttonWidth,
-    height: buttonHeight,
+    height: foodH,
     image: foodIcon,
-    label: "F"
   };
 
   waterButton = {
     x: sideMargin,
-    y: screenHeight / 2 + buttonHeight / 2 + sideSpacingBetweenButtons,
+    y: screenHeight / 2 + foodH / 2 + sideSpacingBetweenButtons,
     width: buttonWidth,
-    height: buttonHeight,
+    height: waterH,
     image: waterIcon,
-    label: "W"
   };
 
   console.log("Setup complete");
@@ -116,40 +122,72 @@ function draw() {
 }
 
 function mousePressed() {
-  // Button Interaction 
+  if (handleTopButtons()) return;
+  if (handleSideButtons()) return;
+  if (handleCreatureInteractions()) return;
+  if (handlePlantInteractions()) return;
+}
+
+// Button Spawn Interaction 
+function handleTopButtons() {
   if (isInsideButton(mouseX, mouseY, spawnCreatureButton)) {
+    resetIcons();
     currentTool = "none";
     creatures.push(new Creature(random(screenWidth), random(screenHeight)));
+    return true;
   } else if (isInsideButton(mouseX, mouseY, spawnPlantButton)) {
+    resetIcons();
     currentTool = "none";
     plants.push(new Plant(random(screenWidth), random(screenHeight)));
-  } else if (isInsideButton(mouseX, mouseY, swordButton)) {
+    return true;
+  }
+  return false;
+}
+
+function handleSideButtons() {
+  // Button Tool Interaction
+  if (isInsideButton(mouseX, mouseY, swordButton)) {
+    resetIcons();
+
+
     if (currentTool === "sword") {
       currentTool = "none";
       console.log("Sword button deselected");
     } else {
+      swordButton.image = swordIconEmpty;
       currentTool = "sword";
-      console.log("Sword button clicked");
     }
+
+    return true;
   } else if (isInsideButton(mouseX, mouseY, foodButton)) {
+    resetIcons();
+
     if (currentTool === "food") {
       currentTool = "none";
       console.log("Food button deselected");
     } else {
+      foodButton.image = foodIconEmpty;
       currentTool = "food";
       console.log("Food button clicked");
     }
+    return true;
 
   } else if (isInsideButton(mouseX, mouseY, waterButton)) {
+    resetIcons();
     if (currentTool === "water") {
       currentTool = "none";
       console.log("Water button deselected");
     } else {
+      waterButton.image = waterIconEmpty;
       currentTool = "water";
       console.log("Water button clicked");
     }
+    return true;
   }
+  return false;
+}
 
+function handleCreatureInteractions() {
   // Creature Interaction
   if (currentTool === "food") {
     for (let creature of creatures) {
@@ -160,7 +198,12 @@ function mousePressed() {
         break;
       }
     }
+    return true;
   }
+  return false;
+}
+
+function handlePlantInteractions() {
   // Plant Interaction
   if (currentTool === "water") {
     for (let plant of plants) {
@@ -171,6 +214,13 @@ function mousePressed() {
         break;
       }
     }
+    return true;
   }
+  return false;
+}
 
+function resetIcons() {
+  swordButton.image = swordIcon;
+  foodButton.image = foodIcon;
+  waterButton.image = waterIcon;
 }

@@ -118,7 +118,10 @@ class Creature {
         noStroke();
 
         // Creature
+        push();
+        imageMode(CENTER);
         image(img, this.x, this.y - bounce, this.size, (img.height / img.width) * this.size);
+        pop();
 
     }
 
