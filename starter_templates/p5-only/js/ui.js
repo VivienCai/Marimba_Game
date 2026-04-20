@@ -37,8 +37,8 @@ function isInsideButton(mx, my, button) {
         my > button.y &&
         my < button.y + button.height
     ) {
-        console.log(button.x, button.x + button.width, button.y, button.y + button.height);
-        console.log(mx, my);
+        // console.log(button.x, button.x + button.width, button.y, button.y + button.height);
+        // console.log(mx, my);
         return true;
     }
     return false;

@@ -28,8 +28,8 @@ class Creature {
         this.startY = this.y;
 
         // Keep target within bounds
-        this.targetX = constrain(targetX, 0, screenWidth);
-        this.targetY = constrain(targetY, 80, screenHeight);
+        this.targetX = constrain(targetX, 0, SCREEN_WIDTH);
+        this.targetY = constrain(targetY, 80, SCREEN_HEIGHT);
 
         this.isHopping = true;
         this.hopProgress = 0;

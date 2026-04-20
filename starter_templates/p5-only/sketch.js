@@ -1,28 +1,41 @@
-screenWidth = 1300;
-screenHeight = 1000;
+// CONFIG -----------------------------------------------------------------------
+const SCREEN_WIDTH = 1300;
+const SCREEN_HEIGHT = 1000;
 
-buttonWidth = 90;
-buttonHeight = 90;
+const BUTTON_WIDTH = 90;
+const BUTTON_HEIGHT = 90;
 
-topSpacingBetweenButtons = 50;
-sideSpacingBetweenButtons = 50;
+const TOP_BUTTON_SPACING = 50;
+const SIDE_BUTTON_SPACING = 50;
+const MARGIN = 30;
 
-margin = 30;
-
+// GAME STATE ----------------------------------------------------------------------
 let creatures = [];
 let plants = [];
 
+let currentTool = "none";
+
+// Buttons
 let spawnCreatureButton;
 let spawnPlantButton;
+let swordButton;
+let foodButton;
+let waterButton;
 
-let currentTool = "none";
+// Assets
+let swordIcon, swordIconEmpty;
+let foodIcon, foodIconEmpty;
+let waterIcon, waterIconEmpty;
+
+let spawnCreatureIcon, spawnPlantIcon;
+let spawnCreaturePressedIcon, spawnPlantPressedIcon;
 
 let creatureBabyImages = [];
 let creatureAdultImages = [];
 let plantBabyImages = [];
 let plantAdultImages = [];
 
-// Loading assets (images, sounds, etc.) 
+// ASSET LOADING ----------------------------------------------------------------
 function preload() {
   swordIcon = loadImage('assets/ui/UI_sword.png');
   swordIconEmpty = loadImage('assets/ui/UI_sword_outline.png');
@@ -53,52 +66,52 @@ function preload() {
 
 
 function setup() {
-  let swordH = swordIcon.height / swordIcon.width * buttonWidth;
-  let foodH = foodIcon.height / foodIcon.width * buttonWidth;
-  let waterH = waterIcon.height / waterIcon.width * buttonWidth;
-
-  createCanvas(screenWidth, screenHeight);
+  createCanvas(SCREEN_WIDTH, SCREEN_HEIGHT);
   noSmooth();
 
+  const swordH = swordIcon.height / swordIcon.width * BUTTON_WIDTH;
+  const foodH = foodIcon.height / foodIcon.width * BUTTON_WIDTH;
+  const waterH = waterIcon.height / waterIcon.width * BUTTON_WIDTH;
+
   spawnCreatureButton = {
-    x: (screenWidth / 2) - (buttonWidth + topSpacingBetweenButtons / 2),
-    y: margin,
-    width: buttonWidth,
-    height: buttonHeight,
+    x: (SCREEN_WIDTH / 2) - (BUTTON_WIDTH + TOP_BUTTON_SPACING / 2),
+    y: MARGIN,
+    width: BUTTON_WIDTH,
+    height: BUTTON_HEIGHT,
     image: spawnCreatureIcon,
     label: "Spawn Creature"
   };
 
   spawnPlantButton = {
-    x: screenWidth / 2 + topSpacingBetweenButtons / 2,
-    y: margin,
-    width: buttonWidth,
-    height: buttonHeight,
+    x: SCREEN_WIDTH / 2 + TOP_BUTTON_SPACING / 2,
+    y: MARGIN,
+    width: BUTTON_WIDTH,
+    height: BUTTON_HEIGHT,
     image: spawnPlantIcon,
     label: "Spawn Plant"
   };
 
   swordButton = {
-    x: margin,
-    y: screenHeight / 2 - foodH / 2 - sideSpacingBetweenButtons - swordH,
+    x: MARGIN,
+    y: SCREEN_HEIGHT / 2 - foodH / 2 - SIDE_BUTTON_SPACING - swordH,
     rotation: 45,
-    width: buttonWidth,
+    width: BUTTON_WIDTH,
     height: swordH,
     image: swordIcon,
   };
 
   foodButton = {
-    x: margin,
-    y: screenHeight / 2 - foodH / 2 - 10,
-    width: buttonWidth,
+    x: MARGIN,
+    y: SCREEN_HEIGHT / 2 - foodH / 2 - 10,
+    width: BUTTON_WIDTH,
     height: foodH,
     image: foodIcon,
   };
 
   waterButton = {
-    x: margin,
-    y: screenHeight / 2 + foodH / 2 + sideSpacingBetweenButtons,
-    width: buttonWidth,
+    x: MARGIN,
+    y: SCREEN_HEIGHT / 2 + foodH / 2 + SIDE_BUTTON_SPACING,
+    width: BUTTON_WIDTH,
     height: waterH,
     image: waterIcon,
   };
@@ -114,7 +127,7 @@ function draw() {
   drawCreatures();
   drawUI();
 
-  // ellipse(screenWidth / 2 + 50, screenHeight / 2 + 200, 1000, 300);
+  ellipse(SCREEN_WIDTH / 2 + 50, SCREEN_HEIGHT / 2 + 200, 1100, 400);
 
   if (currentTool === "sword") {
     drawSwordCursor();

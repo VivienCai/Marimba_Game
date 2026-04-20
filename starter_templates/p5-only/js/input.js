@@ -10,12 +10,12 @@ function handleTopButtons() {
     if (isInsideButton(mouseX, mouseY, spawnCreatureButton)) {
         resetIcons();
         currentTool = "none";
-        creatures.push(new Creature(random(screenWidth), random(screenHeight)));
+        creatures.push(new Creature(random(SCREEN_WIDTH), random(SCREEN_HEIGHT)));
         return true;
     } else if (isInsideButton(mouseX, mouseY, spawnPlantButton)) {
         resetIcons();
         currentTool = "none";
-        plants.push(new Plant(random(screenWidth), random(screenHeight)));
+        plants.push(new Plant(random(SCREEN_WIDTH), random(SCREEN_HEIGHT)));
         return true;
     }
     return false;
