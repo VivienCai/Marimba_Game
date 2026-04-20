@@ -1,8 +1,14 @@
 function mousePressed() {
-    if (handleTopButtons()) return;
-    if (handleSideButtons()) return;
-    if (handleCreatureInteractions()) return;
-    if (handlePlantInteractions()) return;
+    if (paused) {
+        if (detectPausedClick()) return;
+    }
+    else {
+        if (detectPausedClick()) return;
+        if (handleTopButtons()) return;
+        if (handleSideButtons()) return;
+        if (handleCreatureInteractions()) return;
+        if (handlePlantInteractions()) return;
+    }
 }
 
 // Button Spawn Interaction 
@@ -101,4 +107,13 @@ function resetIcons() {
     swordButton.image = swordIcon;
     foodButton.image = foodIcon;
     waterButton.image = waterIcon;
+}
+
+function detectPausedClick() {
+    let d = dist(mouseX, mouseY, 50, 50);
+    if (d < 25) {
+        paused = !paused;
+        return true;
+    }
+    return false;
 }

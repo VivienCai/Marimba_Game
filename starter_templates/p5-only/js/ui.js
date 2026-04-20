@@ -5,6 +5,7 @@ function drawUI() {
     drawButton(swordButton);
     drawButton(foodButton);
     drawButton(waterButton);
+    drawPauseButton();
 }
 
 function drawButton(button) {
@@ -83,4 +84,16 @@ function updateTopButtonSprites() {
     } else {
         spawnPlantButton.image = spawnPlantIcon;
     }
+}
+
+function drawPauseButton() {
+    push();
+
+    rectMode(CENTER);
+    noStroke();
+    fill(61, 204, 204)
+    rect(30, 40, 20, 50);
+    rect(60, 40, 20, 50);
+
+    pop();
 }

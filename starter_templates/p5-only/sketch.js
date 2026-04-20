@@ -21,6 +21,7 @@ let creatures = [];
 let plants = [];
 
 let currentTool = "none";
+let paused = false;
 
 // Buttons
 let spawnCreatureButton;
@@ -128,23 +129,31 @@ function setup() {
 }
 
 function draw() {
-  background(240);
-  ellipse(ARENA.x, ARENA.y, ARENA.w, ARENA.h);
+  if (paused) {
+    image(lastFrame, 0, 0);
+    fill(247, 255, 254, 100);
+    rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+  } else {
+    background(240);
+    ellipse(ARENA.x, ARENA.y, ARENA.w, ARENA.h);
 
-  drawPlants();
-  drawCreatures();
-  drawUI();
+    drawPlants();
+    drawCreatures();
+    drawUI();
 
 
-  if (currentTool === "sword") {
-    drawSwordCursor();
-  } else if (currentTool === "food") {
-    drawFoodCursor();
-  } else if (currentTool === "water") {
-    drawWaterCursor();
-  } else if (currentTool === "none") {
-    cursor();
+    if (currentTool === "sword") {
+      drawSwordCursor();
+    } else if (currentTool === "food") {
+      drawFoodCursor();
+    } else if (currentTool === "water") {
+      drawWaterCursor();
+    } else if (currentTool === "none") {
+      cursor();
+    }
+    lastFrame = get();
   }
+
 }
 
 // HELPERS ----------------------------------------------------------------------
