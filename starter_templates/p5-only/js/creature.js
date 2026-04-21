@@ -16,6 +16,7 @@ class Creature {
         this.stage = "baby";
         this.isHopping = false;
         this.isAlive = true;
+        this.deathTimer = 0;
 
         this.hopProgress = 0;
         this.hopDuration = 20;
@@ -111,6 +112,8 @@ class Creature {
 
         let img;
         if (!this.isAlive) {
+            let alpha = map(this.deathTimer, 100, 240, 255, 0);
+            tint(255, alpha);
             img = deadCreatureImage;
         }
         else if (this.stage === "baby") {
@@ -143,12 +146,16 @@ class Creature {
         imageMode(CENTER);
         image(img, this.x, this.y - bounce, this.size, (img.height / img.width) * this.size);
         pop();
+        noTint();
     }
 
     update() {
         if (this.isAlive) {
             this.move();
+        } else {
+            this.deathTimer++;
         }
+
         this.display();
     }
 
@@ -187,7 +194,13 @@ class Creature {
 }
 
 function drawCreatures() {
-    for (let c of creatures) {
+    for (let i = creatures.length - 1; i >= 0; i--) {
+        let c = creatures[i];
         c.update();
+
+        // remove after 60 frames (~1 second)
+        if (!c.isAlive && c.deathTimer > 240) {
+            creatures.splice(i, 1);
+        }
     }
 }
