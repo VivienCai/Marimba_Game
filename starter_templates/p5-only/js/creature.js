@@ -15,6 +15,7 @@ class Creature {
         this.type = int(random(3));
         this.stage = "baby";
         this.isHopping = false;
+        this.isAlive = true;
 
         this.hopProgress = 0;
         this.hopDuration = 20;
@@ -109,20 +110,34 @@ class Creature {
         }
 
         let img;
-        if (this.stage === "baby") {
+        if (!this.isAlive) {
+            img = deadCreatureImage;
+        }
+        else if (this.stage === "baby") {
             img = creatureBabyImages[this.type];
         } else {
             img = creatureAdultImages[this.type];
         }
 
-        fill(0, 40);
-        ellipse(
-            this.x,
-            this.y + (img.height / img.width) * this.size * 0.55,
-            this.size * 0.8,
-            this.size * 0.3
-        );
-        noStroke();
+        if (this.isAlive) {
+            fill(0, 40);
+            ellipse(
+                this.x,
+                this.y + (img.height / img.width) * this.size * 0.55,
+                this.size * 0.8,
+                this.size * 0.3
+            );
+            noStroke();
+        } else {
+            fill(0, 40);
+            ellipse(
+                this.x,
+                this.y + (img.height / img.width) * this.size * 0.4 - bounce,
+                this.size * 0.8,
+                this.size * 0.3
+            );
+            noStroke();
+        }
 
         push();
         imageMode(CENTER);
@@ -131,7 +146,9 @@ class Creature {
     }
 
     update() {
-        this.move();
+        if (this.isAlive) {
+            this.move();
+        }
         this.display();
     }
 
@@ -148,7 +165,7 @@ class Creature {
     }
 
     feed() {
-        if (this.size < 140) {
+        if (this.size < 120) {
             this.size += 5;
             if (this.size >= this.adultSize && this.stage === "baby") {
                 this.stage = "adult";
@@ -157,10 +174,15 @@ class Creature {
                 }
             }
         }
-        else if (this.size < 190 && this.type === 2) {
+        else if (this.size < 170 && this.type === 2) {
             this.size += 5;
         }
 
+    }
+
+    die() {
+        this.isAlive = false;
+        this.size += 20;
     }
 }
 

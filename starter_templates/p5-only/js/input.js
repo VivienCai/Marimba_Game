@@ -76,10 +76,25 @@ function handleCreatureInteractions() {
     if (currentTool === "food") {
         for (let creature of creatures) {
             if (creature.isClicked(mouseX, mouseY)) {
-                console.log("Creature clicked");
-                creature.feed();
-                // currentTool = "none";
-                break;
+                if (creature.isAlive) {
+                    console.log("Creature clicked");
+                    creature.feed();
+                    // currentTool = "none";
+                    break;
+                }
+            }
+        }
+        return true;
+    }
+    else if (currentTool === "sword") {
+        for (let creature of creatures) {
+            if (creature.isClicked(mouseX, mouseY)) {
+                if (creature.isAlive) {
+                    console.log("Creature killed");
+                    creature.die();
+                    // currentTool = "none";
+                    break;
+                }
             }
         }
         return true;

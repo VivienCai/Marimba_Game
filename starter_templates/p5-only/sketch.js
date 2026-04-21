@@ -42,6 +42,7 @@ let creatureBabyImages = [];
 let creatureAdultImages = [];
 let plantBabyImages = [];
 let plantAdultImages = [];
+let deadCreatureImage = [];
 
 // ASSET LOADING ----------------------------------------------------------------
 function preload() {
@@ -70,6 +71,8 @@ function preload() {
   plantAdultImages[1] = loadImage('assets/tree_2_grown.png');
   plantBabyImages[2] = loadImage('assets/tree_3_seed.png');
   plantAdultImages[2] = loadImage('assets/tree_3_grown.png');
+
+  deadCreatureImage = loadImage('assets/cooked_food_blue.png');
 }
 
 
