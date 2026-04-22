@@ -11,9 +11,9 @@ const MARGIN = 30;
 
 const ARENA = {
   x: SCREEN_WIDTH / 2,
-  y: SCREEN_HEIGHT / 2 + 175,
-  w: 1200,
-  h: 400
+  y: SCREEN_HEIGHT / 2 + 190,
+  w: 1250,
+  h: 450
 };
 
 // GAME STATE ----------------------------------------------------------------------
@@ -186,10 +186,11 @@ function draw() {
     background(240);
 
     drawBackground();
-    // fill(100, 100, 100, 100);
-    // ellipse(ARENA.x, ARENA.y, ARENA.w, ARENA.h);
+    fill(100, 100, 100, 100);
+    ellipse(ARENA.x, ARENA.y, ARENA.w, ARENA.h);
     drawPlants();
     drawCreatures();
+    drawLayer(fg10, 0.8); // foreground
     drawUI();
 
     push();

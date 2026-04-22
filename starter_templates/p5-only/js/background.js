@@ -10,7 +10,6 @@ function drawBackground() {
     drawClouds(fg8, 0.375, fg8clouds);
 
     drawLayer(fg9, 0.5);
-    drawLayer(fg10, 0.8);
 }
 
 function drawClouds(img, heightRatio, cloud) {
