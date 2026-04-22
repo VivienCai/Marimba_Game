@@ -89,7 +89,7 @@ function handleCreatureInteractions() {
     else if (currentTool === "sword") {
         for (let creature of creatures) {
             if (creature.isClicked(mouseX, mouseY)) {
-                if (creature.isAlive) {
+                if (creature.isAlive && creature.stage === "adult") {
                     console.log("Creature killed");
                     creature.die();
                     // currentTool = "none";

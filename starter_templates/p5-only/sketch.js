@@ -1,6 +1,6 @@
 // CONFIG -----------------------------------------------------------------------
-const SCREEN_WIDTH = 1300;
-const SCREEN_HEIGHT = 1000;
+const SCREEN_WIDTH = 1500;
+const SCREEN_HEIGHT = 1050;
 
 const BUTTON_WIDTH = 90;
 const BUTTON_HEIGHT = 90;
@@ -10,9 +10,9 @@ const SIDE_BUTTON_SPACING = 50;
 const MARGIN = 30;
 
 const ARENA = {
-  x: SCREEN_WIDTH / 2 + 50,
-  y: SCREEN_HEIGHT / 2 + 200,
-  w: 1100,
+  x: SCREEN_WIDTH / 2,
+  y: SCREEN_HEIGHT / 2 + 175,
+  w: 1200,
   h: 400
 };
 
@@ -31,6 +31,10 @@ let foodButton;
 let waterButton;
 
 // Assets
+let bg1, bg2, bg3, mg4, mg5, mg6, fg7, fg8, fg9, fg10;
+
+let bg2clouds, mg4fog, mg5clouds, fg7fog, fg8clouds;
+
 let swordIcon, swordIconEmpty;
 let foodIcon, foodIconEmpty;
 let waterIcon, waterIconEmpty;
@@ -46,6 +50,17 @@ let deadCreatureImage = [];
 
 // ASSET LOADING ----------------------------------------------------------------
 function preload() {
+  bg1 = loadImage("assets/background/1_BG_Sky.png");
+  bg2 = loadImage("assets/background/2_BG_Cloud.png");
+  bg3 = loadImage("assets/background/3_BG_Mountains.png");
+  mg4 = loadImage("assets/background/4_MG_Fog.png");
+  mg5 = loadImage("assets/background/5_MG_Cloud.png");
+  mg6 = loadImage("assets/background/6_MG_Mountains.png");
+  fg7 = loadImage("assets/background/7_FG_Fog.png");
+  fg8 = loadImage("assets/background/8_FG_Cloud.png");
+  fg9 = loadImage("assets/background/9_FG_Field.png");
+  fg10 = loadImage("assets/background/10_FG_trees.png");
+
   swordIcon = loadImage('assets/ui/UI_sword.png');
   swordIconEmpty = loadImage('assets/ui/UI_sword_outline.png');
   foodIcon = loadImage('assets/ui/UI_food.png');
@@ -127,6 +142,37 @@ function setup() {
     image: waterIcon,
   };
 
+  bg2clouds = {
+    x1: -500,
+    x2: SCREEN_WIDTH * 2 - 500,
+    speed: 0.1,
+  }
+
+  mg4fog = {
+    x1: 0,
+    x2: SCREEN_WIDTH * 2,
+    speed: 0.5,
+  }
+
+  mg5clouds = {
+    x1: - 300,
+    x2: SCREEN_WIDTH * 2 - 300,
+    speed: 0.25,
+  }
+
+  fg7fog = {
+    x1: 0,
+    x2: SCREEN_WIDTH * 2,
+    speed: 0.7,
+  }
+
+  fg8clouds = {
+    x1: -100,
+    x2: SCREEN_WIDTH * 2 - 100,
+    speed: 0.5,
+  }
+
+
   console.log("Setup complete");
 
 }
@@ -138,8 +184,10 @@ function draw() {
     rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
   } else {
     background(240);
-    ellipse(ARENA.x, ARENA.y, ARENA.w, ARENA.h);
 
+    drawBackground();
+    // fill(100, 100, 100, 100);
+    // ellipse(ARENA.x, ARENA.y, ARENA.w, ARENA.h);
     drawPlants();
     drawCreatures();
     drawUI();
