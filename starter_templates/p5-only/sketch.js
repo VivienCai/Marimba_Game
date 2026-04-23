@@ -48,6 +48,7 @@ let creatureBabyImages = [];
 let creatureAdultImages = [];
 let plantBabyImages = [];
 let plantAdultImages = [];
+let plantDeadImages = [];
 let deadCreatureImage = [];
 
 // ASSET LOADING ----------------------------------------------------------------
@@ -101,6 +102,10 @@ function preload() {
   plantBabyImages[2] = loadImage('assets/tree_3_seed.png');
   plantAdultImages[2] = loadImage('assets/tree_3_grown.png');
 
+  plantDeadImages[0] = loadImage('assets/tree_1_dead.png');
+  plantDeadImages[1] = loadImage('assets/tree_2_dead.png');
+  plantDeadImages[2] = loadImage('assets/tree_3_dead.png');
+
   deadCreatureImage = loadImage('assets/cooked_food_blue.png');
 }
 
@@ -110,8 +115,8 @@ function setup() {
   noSmooth();
 
   outputVolume(0.09);
-  creatureJumpSfx.setVolume(0.3);
-  bgmusic.setVolume(0.4);
+  creatureJumpSfx.setVolume(0.4);
+  bgmusic.setVolume(0.3);
 
 
   bgmusic.setLoop(true);
