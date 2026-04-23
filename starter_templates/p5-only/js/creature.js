@@ -173,6 +173,7 @@ class Creature {
     }
 
     feed() {
+        foodSfx.play();
         if (this.size < 120) {
             this.size += 5;
             if (this.size >= this.adultSize && this.stage === "baby") {

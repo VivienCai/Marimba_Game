@@ -133,6 +133,7 @@ function detectPausedClick() {
     let d = dist(mouseX, mouseY, 50, 50);
     if (d < 25) {
         paused = !paused;
+        spawnSfx.play();
         return true;
     }
     return false;

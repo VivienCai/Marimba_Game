@@ -170,11 +170,11 @@ function setup() {
   };
 
   swordButtonEmpty = {
-    x: MARGIN,
-    y: SCREEN_HEIGHT / 2 - foodH / 2 - SIDE_BUTTON_SPACING - swordH,
+    x: MARGIN - 5,
+    y: SCREEN_HEIGHT / 2 - foodH / 2 - SIDE_BUTTON_SPACING - swordH - 5,
     rotation: 45,
-    width: BUTTON_WIDTH,
-    height: swordH,
+    width: BUTTON_WIDTH + 10,
+    height: swordH + 10,
     image: swordIconEmpty,
   };
 

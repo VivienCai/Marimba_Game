@@ -44,6 +44,7 @@ class Plant {
     }
 
     water() {
+        waterSfx.play();
         if (this.size < this.adultSize + 35) {
             this.size += 5;
         }
