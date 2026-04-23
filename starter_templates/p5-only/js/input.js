@@ -40,7 +40,7 @@ function handleSideButtons() {
             currentTool = "none";
             console.log("Sword button deselected");
         } else {
-            swordButton.image = swordIconEmpty;
+            swordButton.image = null;
             currentTool = "sword";
             swordSfx.play();
             console.log("Sword button clicked");
@@ -53,7 +53,7 @@ function handleSideButtons() {
             currentTool = "none";
             console.log("Food button deselected");
         } else {
-            foodButton.image = foodIconEmpty;
+            foodButton.image = null;
             currentTool = "food";
             foodSfx.play();
             console.log("Food button clicked");
@@ -66,7 +66,7 @@ function handleSideButtons() {
             currentTool = "none";
             console.log("Water button deselected");
         } else {
-            waterButton.image = waterIconEmpty;
+            waterButton.image = null;
             currentTool = "water";
             waterSfx.play();
             console.log("Water button clicked");

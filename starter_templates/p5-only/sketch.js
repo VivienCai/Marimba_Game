@@ -153,6 +153,31 @@ function setup() {
     image: swordIcon,
   };
 
+  foodButtonEmpty = {
+    x: MARGIN - 5,
+    y: SCREEN_HEIGHT / 2 - foodH / 2 - 15,
+    width: BUTTON_WIDTH + 10,
+    height: foodH + 10,
+    image: foodIconEmpty,
+  };
+
+  waterButtonEmpty = {
+    x: MARGIN - 5,
+    y: SCREEN_HEIGHT / 2 + foodH / 2 + SIDE_BUTTON_SPACING - 5,
+    width: BUTTON_WIDTH + 10,
+    height: waterH + 10,
+    image: waterIconEmpty,
+  };
+
+  swordButtonEmpty = {
+    x: MARGIN,
+    y: SCREEN_HEIGHT / 2 - foodH / 2 - SIDE_BUTTON_SPACING - swordH,
+    rotation: 45,
+    width: BUTTON_WIDTH,
+    height: swordH,
+    image: swordIconEmpty,
+  };
+
   foodButton = {
     x: MARGIN,
     y: SCREEN_HEIGHT / 2 - foodH / 2 - 10,
@@ -217,8 +242,8 @@ function draw() {
     background(240);
 
     drawBackground();
-    fill(100, 100, 100, 100);
-    ellipse(ARENA.x, ARENA.y, ARENA.w, ARENA.h);
+    // fill(100, 100, 100, 100);
+    // ellipse(ARENA.x, ARENA.y, ARENA.w, ARENA.h);
     drawPlants();
     drawCreatures();
     drawLayer(fg10, 0.8); // foreground

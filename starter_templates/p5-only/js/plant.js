@@ -64,6 +64,7 @@ class Plant {
 
     die() {
         this.isAlive = false;
+        plantGrowSfx.play();
     }
 }
 

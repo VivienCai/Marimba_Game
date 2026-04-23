@@ -1,5 +1,8 @@
 function drawUI() {
     updateTopButtonSprites();
+    drawButton(foodButtonEmpty);
+    drawButton(waterButtonEmpty);
+    drawButton(swordButtonEmpty);
     drawButton(spawnCreatureButton);
     drawButton(spawnPlantButton);
     drawButton(swordButton);
@@ -24,11 +27,12 @@ function drawButton(button) {
             image(button.image, button.x, button.y, button.width, button.height);
         }
 
-    } else {
-        fill(0);
-        textAlign(CENTER, CENTER);
-        text(button.label, button.x + button.width / 2, button.y + button.height / 2);
     }
+    // else {
+    //     fill(0);
+    //     textAlign(CENTER, CENTER);
+    //     text(button.label, button.x + button.width / 2, button.y + button.height / 2);
+    // }
 }
 
 function isInsideButton(mx, my, button) {
