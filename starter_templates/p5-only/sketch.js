@@ -31,6 +31,8 @@ let foodButton;
 let waterButton;
 
 // Assets
+let bgmusic, spawnSfx, waterSfx, swordSfx, foodSfx;
+
 let bg1, bg2, bg3, mg4, mg5, mg6, fg7, fg8, fg9, fg10;
 
 let bg2clouds, mg4fog, mg5clouds, fg7fog, fg8clouds;
@@ -50,6 +52,14 @@ let deadCreatureImage = [];
 
 // ASSET LOADING ----------------------------------------------------------------
 function preload() {
+  soundFormats('mp3', 'wav');
+
+  bgmusic = loadSound("assets/audio/Bg_Music.mp3");
+  spawnSfx = loadSound("assets/audio/UI_Spawn_Sound.wav");
+  waterSfx = loadSound("assets/audio/UI_Water_Sound.wav");
+  swordSfx = loadSound("assets/audio/UI_Sword_Sound.wav");
+  foodSfx = loadSound("assets/audio/UI_Food_Sound.wav");
+
   bg1 = loadImage("assets/background/1_BG_Sky.png");
   bg2 = loadImage("assets/background/2_BG_Cloud.png");
   bg3 = loadImage("assets/background/3_BG_Mountains.png");

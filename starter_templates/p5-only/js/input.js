@@ -19,12 +19,14 @@ function handleTopButtons() {
 
         let pos = randomPointInArena();
         creatures.push(new Creature(pos.x, pos.y));
+        spawnSfx.play();
         return true;
     } else if (isInsideButton(mouseX, mouseY, spawnPlantButton)) {
         resetIcons();
         currentTool = "none";
         let pos = randomPointInArena();
         plants.push(new Plant(pos.x, pos.y));
+        spawnSfx.play();
         return true;
     }
     return false;
@@ -52,6 +54,7 @@ function handleSideButtons() {
         } else {
             foodButton.image = foodIconEmpty;
             currentTool = "food";
+            foodSfx.play();
             console.log("Food button clicked");
         }
         return true;
