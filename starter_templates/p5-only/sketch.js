@@ -31,7 +31,7 @@ let foodButton;
 let waterButton;
 
 // Assets
-let bgmusic, spawnSfx, waterSfx, swordSfx, foodSfx;
+let bgmusic, spawnSfx, waterSfx, swordSfx, foodSfx, creatureJumpSfx, plantGrowSfx, creatureGrowSfx, creatureDeathSfx;
 
 let bg1, bg2, bg3, mg4, mg5, mg6, fg7, fg8, fg9, fg10;
 
@@ -59,6 +59,10 @@ function preload() {
   waterSfx = loadSound("assets/audio/UI_Water_Sound.wav");
   swordSfx = loadSound("assets/audio/UI_Sword_Sound.wav");
   foodSfx = loadSound("assets/audio/UI_Food_Sound.wav");
+  creatureJumpSfx = loadSound("assets/audio/Creature_Jump.wav");
+  plantGrowSfx = loadSound("assets/audio/Plant_Grow.wav");
+  creatureGrowSfx = loadSound("assets/audio/Animal_Grow.mp3");
+  creatureDeathSfx = loadSound("assets/audio/Kill_Sound.wav");
 
   bg1 = loadImage("assets/background/1_BG_Sky.png");
   bg2 = loadImage("assets/background/2_BG_Cloud.png");
@@ -104,6 +108,14 @@ function preload() {
 function setup() {
   createCanvas(SCREEN_WIDTH, SCREEN_HEIGHT);
   noSmooth();
+
+  outputVolume(0.09);
+  creatureJumpSfx.setVolume(0.3);
+  bgmusic.setVolume(0.4);
+
+
+  bgmusic.setLoop(true);
+  bgmusic.play();
 
   const swordH = swordIcon.height / swordIcon.width * BUTTON_WIDTH;
   const foodH = foodIcon.height / foodIcon.width * BUTTON_WIDTH;
@@ -167,19 +179,19 @@ function setup() {
   mg5clouds = {
     x1: - 300,
     x2: SCREEN_WIDTH * 2 - 300,
-    speed: 0.25,
+    speed: 0.2,
   }
 
   fg7fog = {
     x1: 0,
     x2: SCREEN_WIDTH * 2,
-    speed: 0.7,
+    speed: 0.8,
   }
 
   fg8clouds = {
     x1: -100,
     x2: SCREEN_WIDTH * 2 - 100,
-    speed: 0.5,
+    speed: 0.6,
   }
 
 
@@ -192,7 +204,11 @@ function draw() {
     image(lastFrame, 0, 0);
     fill(247, 255, 254, 100);
     rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    bgmusic.pause();
   } else {
+    if (!bgmusic.isPlaying()) {
+      bgmusic.play();
+    }
     background(240);
 
     drawBackground();

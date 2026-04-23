@@ -35,9 +35,9 @@ class Plant {
 
     water() {
         this.size += 5;
-        if (this.size >= this.adultSize) {
+        if (this.size >= this.adultSize && this.stage === "baby") {
+            plantGrowSfx.play();
             this.stage = "adult";
-
         }
     }
 

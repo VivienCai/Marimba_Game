@@ -96,6 +96,7 @@ class Creature {
             this.y = lerp(this.startY, this.targetY, t);
 
             if (t >= 1) {
+                creatureJumpSfx.play();
                 this.isHopping = false;
                 this.waitTimer = int(random(20, 60));
             }
@@ -175,6 +176,7 @@ class Creature {
         if (this.size < 120) {
             this.size += 5;
             if (this.size >= this.adultSize && this.stage === "baby") {
+                creatureGrowSfx.play();
                 this.stage = "adult";
                 if (this.type === 2) {
                     this.size += 50;
@@ -188,6 +190,7 @@ class Creature {
     }
 
     die() {
+        creatureDeathSfx.play();
         this.isAlive = false;
         this.size += 20;
     }

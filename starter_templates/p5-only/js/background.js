@@ -8,14 +8,12 @@ function drawBackground() {
     drawLayer(mg6, 0.4);
     drawClouds(fg7, 0.35, fg7fog);
     drawClouds(fg8, 0.375, fg8clouds);
-
     drawLayer(fg9, 0.5);
 }
 
 function drawClouds(img, heightRatio, cloud) {
     image(img, cloud.x1, heightRatio * SCREEN_HEIGHT, SCREEN_WIDTH * 2, (img.height / img.width) * 2 * SCREEN_WIDTH);
     image(img, cloud.x2, heightRatio * SCREEN_HEIGHT, SCREEN_WIDTH * 2, (img.height / img.width) * 2 * SCREEN_WIDTH);
-    console.log('subtracking');
     cloud.x1 -= cloud.speed;
     cloud.x2 -= cloud.speed;
 

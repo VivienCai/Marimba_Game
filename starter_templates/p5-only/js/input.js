@@ -42,6 +42,7 @@ function handleSideButtons() {
         } else {
             swordButton.image = swordIconEmpty;
             currentTool = "sword";
+            swordSfx.play();
             console.log("Sword button clicked");
         }
 
@@ -67,6 +68,7 @@ function handleSideButtons() {
         } else {
             waterButton.image = waterIconEmpty;
             currentTool = "water";
+            waterSfx.play();
             console.log("Water button clicked");
         }
         return true;
