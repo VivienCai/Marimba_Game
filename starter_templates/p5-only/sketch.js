@@ -234,11 +234,9 @@ function draw() {
     image(lastFrame, 0, 0);
     fill(247, 255, 254, 100);
     rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    bgmusic.pause();
-  } else {
-    if (!bgmusic.isPlaying()) {
-      bgmusic.play();
-    }
+  }
+  else {
+
     background(240);
 
     drawBackground();

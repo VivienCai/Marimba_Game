@@ -134,6 +134,11 @@ function detectPausedClick() {
     if (d < 25) {
         paused = !paused;
         spawnSfx.play();
+        if (!paused) {
+            bgmusic.pause();
+        } else {
+            bgmusic.play();
+        }
         return true;
     }
     return false;
