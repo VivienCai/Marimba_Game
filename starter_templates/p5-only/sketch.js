@@ -1,3 +1,7 @@
+// DM2008 Final Project
+// Vivien Cai & Tasha Lin
+// April 24, 2026 
+
 // CONFIG -----------------------------------------------------------------------
 const SCREEN_WIDTH = 1500;
 const SCREEN_HEIGHT = 1050;
